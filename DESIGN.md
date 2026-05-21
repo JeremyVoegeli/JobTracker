@@ -232,3 +232,98 @@ DELETE /api/applications/:id
 ---
 
 ## 4. Frontend Design
+
+### Pages & Components
+
+The app is a single-pahe application with no routing
+
+**Component Tree**
+
+```
+App
+├── Header
+├── FilterBar
+├── ApplicationTable
+│   └── ApplicationRow (× n)
+│       └── StatusBadge
+├── ApplicationModal (Add / Edit)
+│   └── ApplicationForm
+└── DeleteConfirmDialog
+```
+
+---
+
+### Views & Interactions
+
+**Main View**
+- Displays all applications in a table
+- Columns: Job Title, Company, Location, Status, Site, Application Date, Link, Actions
+- Link is displayed as a "view posting" button rather than a raw URL
+- Notes are hidden from the table, they are only visible through the edit modal
+- Each row has **Edit** and **Delete** action buttons
+- A **+ add application** button opens the modal form
+
+**Filter Bar**
+- A row of filter buttons for each status, plus an "All" Button
+- Selecting a status filters the table to matching rows only
+
+**Add / Edit Modal**
+- A form with fields for all application properties except `id` and `lastUpdated`
+- Notes field is a multi-line text area
+- Status is a drop down menu only with the options in the Enum
+- Application date defaults to today's date
+- Submit button labeled **Add Application** (Add mode) or **Save Changes** (Edit mode)
+
+**Delete Confirmation Dialogue**
+- A confirmation prompt appears before deleting an entry
+- Displays the job title and company to ensure the correct application is being deleted
+
+---
+
+### Status Badge Colors
+
+Status badges in the table are color coordinated for quick visual scanning.
+
+| Status | Color |
+| --- | --- |
+| Applied | Blue |
+| Assessment | Purple |
+| Phone Screen | Yellow |
+| Interview | Orange |
+| Offer | Green |
+| Rejected | Red |
+| Withdrawn | Gray |
+
+---
+
+## 5. Project Structure
+
+```
+job-tracker/
+├── client/    ----- React frontend -----
+│   ├── public/
+│   └── src/
+│       ├── components/
+│       │   ├── Header.jsx
+│       │   ├── FilterBar.jsx
+│       │   ├── ApplicationTable.jsx
+│       │   ├── ApplicationRow.jsx
+│       │   ├── StatusBadge.jsx
+│       │   ├── ApplicationModal.jsx
+│       │   ├── ApplicationForm.jsx
+│       │   └── DeleteConfirmDialog.jsx
+│       ├── App.jsx
+│       └── main.jsx
+├── server/    ----- Node/Express backend -----
+│   ├── data/
+│   │   └── applications.json
+│   ├── routes/
+│   │   └── applications.js
+│   ├── middleware/
+│   │   └── errorHandler.js
+│   └── server.js
+├── DESIGN.md
+└── README.md
+```
+ 
+---

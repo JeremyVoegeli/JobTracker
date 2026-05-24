@@ -1,0 +1,16 @@
+meta {
+  name: Get Application by ID
+  type: http
+  seq: 3
+}
+
+get {
+  url: http://localhost:5000/api/applications/663d3ad8-4948-4ec7-b778-790637138888
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

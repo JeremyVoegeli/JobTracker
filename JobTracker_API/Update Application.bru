@@ -1,0 +1,22 @@
+meta {
+  name: Update Application
+  type: http
+  seq: 4
+}
+
+put {
+  url: http://localhost:5000/api/applications/663d3ad8-4948-4ec7-b778-790637138888
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "company": "Poop Company Co. Inc."
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

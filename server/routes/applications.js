@@ -6,7 +6,7 @@ const path = require('path');
 const {v4: uuidv4} = require('uuid');
 
 //Constant for path to json "database"
-const jsonPath = path.join(__dirname, 'data', 'applications.json');
+const jsonPath = path.join(__dirname, '..', 'data', 'applications.json');
 
 //reads the data from the applications.json file, returns the JSON array
 function readData(){

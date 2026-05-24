@@ -1,8 +1,9 @@
-//Requirements for express, a router, file system, and path modules
+//Requirements for express, a router, file system, path, and UUID modules
 const express = require('express');
 const router = express.Router();
 const fs = require('fs');
 const path = require('path');
+const {v4: uuidv4} = require('uuid');
 
 //Constant for path to json "database"
 const jsonPath = path.join(__dirname, 'data', 'applications.json');
@@ -28,6 +29,40 @@ router.get('/', (req, res) => {
     } catch (err) {
         res.status(500).json({error: "Failed to read applications"});
     }
+});
+
+//POST method - creates a new application
+router.post('/', (req, res) => {
+    //check for any missing fields
+    let missingFields = [];
+    if (!req.body.jobTitle){missingFields.push('jobTitle');}
+    if (!req.body.company){missingFields.push('company');}
+    if (!req.body.status){missingFields.push('status');}
+    if (!req.body.applicationDate){missingFields.push('applicationDate');}
+
+    //returns error message if any fields are missing
+    if (missingFields.length > 0){
+        let errorMsg = "Missing required fields: " + missingFields.join(', ');
+        return res.status(400).json({error: errorMsg});
+    }
+
+    let newApplication = req.body;
+
+    //create new fields
+    newApplication.id = uuidv4();
+    const currentDate = new Date()
+    newApplication.lastUpdated = currentDate.toISOString();
+
+    try{
+        //reads old array and writes new array with new application
+        let newArray = readData();
+        newArray.push(newApplication);
+        writeData(newArray);
+    } catch (err) {
+        return res.status(500).json({error: "Failed to read applications.json"});
+    }
+    
+    return res.status(201).json(newApplication);
 });
 
 module.exports = router;

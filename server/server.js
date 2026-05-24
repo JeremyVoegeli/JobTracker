@@ -1,7 +1,7 @@
 //Imports, packages that will be used
 const express = require('express');
 const cors = require('cors');
-const applicationRoutes = require('./route/application');
+const applicationRoutes = require('./routes/applications');
 
 //defines the app as an express instance
 const app = express();

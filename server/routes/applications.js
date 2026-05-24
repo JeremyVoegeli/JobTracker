@@ -31,6 +31,25 @@ router.get('/', (req, res) => {
     }
 });
 
+//GET method - returns the application object with the specified ID
+router.get('/:id', (req, res) => {
+    //reads data, looks for id in applications.json
+    try{
+        const data = readData();
+        const application = data.find(app => app.id === req.params.id);
+
+        //return error if no application
+        if (!application){
+            return res.status(404).json({error: "Application not found"});
+        }
+
+        return res.status(200).json(application);
+
+    } catch (err) {
+        res.status(500).json({error: "Failed to read applications"});
+    }
+});
+
 //POST method - creates a new application
 router.post('/', (req, res) => {
     //check for any missing fields

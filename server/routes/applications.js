@@ -109,4 +109,25 @@ router.put('/:id', (req, res) => {
     }
 });
 
+//DELETE method - removes an application from the file with the given id
+router.delete('/:id', (req, res) => {
+    try{
+        const data = readData();
+
+        //Check that application exists
+        const index = data.findIndex(app => app.id === req.params.id);
+        if (index === -1){
+            return res.status(404).json({error: "Application not found"});
+        }
+
+        //creates new array and writes to file
+        const newArray = data.filter(app => app.id !== req.params.id);
+        writeData(newArray);
+
+        return res.status(200).json({"message": "Application deleted successfully"});
+    } catch (err) {
+        return res.status(500).json({error: "Failed to read applications.json"});
+    }
+});
+
 module.exports = router;

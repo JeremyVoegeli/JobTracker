@@ -84,4 +84,29 @@ router.post('/', (req, res) => {
     return res.status(201).json(newApplication);
 });
 
+//PUT method - updates an application with the given ID with the parameters in the body
+router.put('/:id', (req, res) => {
+    try {
+        const data = readData();
+
+        //find the index of the desired application
+        const index = data.findIndex(app => app.id === req.params.id);
+        if (index === -1){
+            return res.status(404).json({error: "Application not found"});
+        }
+
+        //create and add updated application
+        const oldApplication = data[index];
+        const updatedApplication = {...oldApplication, ...req.body};
+        updatedApplication.lastUpdated = new Date().toISOString();
+
+        data[index] = updatedApplication;
+        writeData(data);
+
+        return res.status(200).json(updatedApplication);
+    } catch (err){
+        return res.status(500).json({error: "Failed to read applications.json"});
+    }
+});
+
 module.exports = router;

@@ -15,8 +15,8 @@ app.use(express.json());
 app.use('/api/applications', applicationRoutes);
 
 //listens on the specified port
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`)
 });
 
-module.exports = {app, server};
+module.exports = { app, server };

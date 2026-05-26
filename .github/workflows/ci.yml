@@ -1,0 +1,20 @@
+name: Test JobTracker API
+on: push
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+      
+      - name: Install Dependencies
+        run: npm install
+        working-directory: server
+      
+      - name: Run Tests
+        run: npm test
+        working-directory: server

@@ -1,2 +1,12 @@
-server/data/applications.json
 server/node_modules
+client/node_modules
+
+server/data/applications.json
+
+.env
+server/.env
+client/.env
+
+.DS_Store
+
+server/tests/test_applications.json

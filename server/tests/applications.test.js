@@ -117,3 +117,48 @@ describe("GET /api/applications/:id", () => {
         expect(response.body).toEqual(expectedResponseBody);
     });
 });
+
+describe("PUT /api/applications/:id", () => {
+    test("2 parameters updated from request body", async () => {
+        const response = await request.put(`/api/applications/${testId}`)
+        .set("Content-Type", "application/json")
+        .send({
+            "jobTitle": "otherMyTitle",
+            "site": "Indeed.com"
+        });
+
+        const expectedResponseBody = {
+            "jobTitle": "otherMyTitle",
+            "company": "myCompany",
+            "location": "Hybrid",
+            "status": "Applied",
+            "link": "https://example.com/job",
+            "site": "Indeed.com",
+            "applicationDate": "2026-05-21",
+            "notes": ""
+        }
+
+        expect(response.status).toBe(200);
+        expect(response.body).toEqual(expect.objectContaining(expectedResponseBody));
+    });
+});
+
+describe("DELETE /api/applications/:id", () => {
+    test("Delete test application", async () => {
+        const response = await request.delete(`/api/applications/${testId}`);
+
+        const expectedResponseBody = {"message": "Application deleted successfully"}
+
+        expect(response.status).toBe(200);
+        expect(response.body).toEqual(expectedResponseBody);
+    });
+
+    test("Attempt to delete non-existant application", async () => {
+        const response = await request.delete("/api/applications/invalid-id");
+        
+        const expectedResponseBody = {"error": "Application not found"}
+        
+        expect(response.status).toBe(404);
+        expect(response.body).toEqual(expectedResponseBody);
+    });
+});

@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 process.env.DATA_FILE = path.join(__dirname, 'test_applications.json');
-const app = require('../server');
+const {app, server} = require('../server');
 const request = require('supertest')(app);
 
 //runs before any test
@@ -13,6 +13,7 @@ beforeAll(async () => {
 //runs after all tests are complete
 afterAll(async () => {
     fs.unlinkSync(process.env.DATA_FILE);
+    server.close()
 });
 
 //saves id of application for tests

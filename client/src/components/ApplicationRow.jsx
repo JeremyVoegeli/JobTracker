@@ -1,4 +1,4 @@
-function ApplicationRow( {application} ){
+function ApplicationRow( {application, onEdit} ){
     return(
         <tr>
             <td>{application.jobTitle}</td>
@@ -11,6 +11,9 @@ function ApplicationRow( {application} ){
             <td>{application.site}</td>
             <td>{application.applicationDate}</td>
             <td>{application.lastUpdated}</td>
+            <td>
+                <button onClick={() => onEdit(application)}>Edit</button>
+            </td>
         </tr>
     );
 }

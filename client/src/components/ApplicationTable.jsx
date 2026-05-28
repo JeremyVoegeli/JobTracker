@@ -1,7 +1,7 @@
 import ApplicationRow from './ApplicationRow';
 
 function ApplicationTable({ applications, onEdit, onDelete }){
-    const thClass = "text-center p-3 text-sm font-semibold text-indigo-100"
+    const thClass = "text-center p-3 text-sm font-semibold text-indigo-100 text-shadow-sm/30 text-shadow-indigo-400"
     return (
         <table className="w-full border-separate border-spacing-y-1 px-1 bg-zinc-700 rounded-[5px]">
             <thead>

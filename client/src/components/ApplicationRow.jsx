@@ -1,7 +1,7 @@
 function ApplicationRow( {application, onEdit, onDelete} ){
     const tdClass = "p-3 border-y border-gray-950 first:border-l first:rounded-l-lg last:border-r last:rounded-r-lg";
     return(
-        <tr className="bg-zinc-600 shadow-sm hover:bg-zinc-500 cursor-pointer">
+        <tr className="bg-zinc-600 shadow-sm hover:bg-zinc-500;shadow-gray-300 cursor-pointer">
             <td className={tdClass}>{application.jobTitle}</td>
             <td className={tdClass}>{application.company}</td>
             <td className={tdClass}>{application.location}</td>

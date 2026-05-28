@@ -70,9 +70,9 @@ function App() {
 	}
 
 	return (
-        <div>
+        <div className="max-w-6x1 mx-auto p-6">
             <Header />
-			<button onClick={() => handleOpenModal()}>Add Application</button>
+			<button className="" onClick={() => handleOpenModal()}>Add Application</button>
 			<ApplicationTable applications={filteredApplications} onEdit={handleOpenModal} onDelete={handleOpenDelete} />
 			<ApplicationModal isModalOpen={isModalOpen} selectedApplication={selectedApplication} onClose={handleCloseModal} onSave={loadApplications} />
 			<FilterBar activeFilter={activeFilter} setActiveFilter={setActiveFilter} />

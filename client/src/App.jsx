@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import Header from './components/Header';
 import ApplicationTable from './components/ApplicationTable';
 import FilterBar from './components/FilterBar';
-import ApplciationModal from "./components/ApplicationModal";
 import ApplicationModal from './components/ApplicationModal';
+import DeleteConfirmDialogue from './components/DeleteConfirmDialogue';
 
 function App() {
 	//async function to get applications from API
@@ -54,9 +54,19 @@ function App() {
 		setApplicationToDelete(application);
 	}
 
-	function handleCloseModal(){
+	//closes the delete confirmation dialogue
+	function handleCloseDelete(){
 		setIsDeleteOpen(false);
 		setApplicationToDelete(null);
+	}
+
+	async function handleConfirmDelete(){
+		const response = await fetch(`http://localhost:5000/api/applications/${applicationToDelete.id}`, {method:"DELETE"});
+		
+		if(response.ok){
+			loadApplications();
+			handleCloseDelete();
+		}
 	}
 
 	return (
@@ -66,6 +76,7 @@ function App() {
 			<ApplicationTable applications={filteredApplications} onEdit={handleOpenModal} onDelete={handleOpenDelete} />
 			<ApplicationModal isModalOpen={isModalOpen} selectedApplication={selectedApplication} onClose={handleCloseModal} onSave={loadApplications} />
 			<FilterBar activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
+			<DeleteConfirmDialogue isDeleteOpen={isDeleteOpen} applicationToDelete={applicationToDelete} onClose={handleCloseDelete} onConfirm={handleConfirmDelete} />
         </div>
 	);
 }

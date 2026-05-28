@@ -1,18 +1,19 @@
 import ApplicationRow from './ApplicationRow';
 
 function ApplicationTable({ applications, onEdit, onDelete }){
+    const thClass = "text-center p-3 text-sm font-semibold text-indigo-100"
     return (
-        <table className="w-full border-separate border-spacing-y-1">
+        <table className="w-full border-separate border-spacing-y-1 px-1 bg-zinc-700 rounded-[5px]">
             <thead>
                 <tr>
-                    <th className="text-left p-3 text-sm font-semibold text-gray-600">Job Title</th>
-                    <th className="text-left p-3 text-sm font-semibold text-gray-600">Company</th>
-                    <th className="text-left p-3 text-sm font-semibold text-gray-600">Location</th>
-                    <th className="text-left p-3 text-sm font-semibold text-gray-600">Status</th>
-                    <th className="text-left p-3 text-sm font-semibold text-gray-600">Link</th>
-                    <th className="text-left p-3 text-sm font-semibold text-gray-600">Site</th>
-                    <th className="text-left p-3 text-sm font-semibold text-gray-600">Application Date</th>
-                    <th className="text-left p-3 text-sm font-semibold text-gray-600">Last Updated</th>
+                    <th className={thClass}>Job Title</th>
+                    <th className={thClass}>Company</th>
+                    <th className={thClass}>Location</th>
+                    <th className={thClass}>Status</th>
+                    <th className={thClass}>Link</th>
+                    <th className={thClass}>Site</th>
+                    <th className={thClass}>Application Date</th>
+                    <th className={thClass}>Last Updated</th>
                 </tr>
             </thead>
             <tbody>

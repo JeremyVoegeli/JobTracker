@@ -13,7 +13,7 @@ function ApplicationRow( {application, onEdit, onDelete} ){
             <td className={tdClass}>{application.applicationDate}</td>
             <td className={tdClass}>{application.lastUpdated}</td>
             <td className={tdClass}>
-                <button onClick={() => onDelete(application)}>Delete</button>
+                <button onClick={(e) => {e.stopPropagation(); onDelete(application)}}>Delete</button>
             </td>
         </tr>
     );

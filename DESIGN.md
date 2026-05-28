@@ -260,8 +260,9 @@ App
 - Columns: Job Title, Company, Location, Status, Site, Application Date, Link, Actions
 - Link is displayed as a "view posting" button rather than a raw URL
 - Notes are hidden from the table, they are only visible through the edit modal
-- Each row has **Edit** and **Delete** action buttons
+- Each row has a **Delete** action button
 - A **+ add application** button opens the modal form
+- Clicking the row opens the modal in edit mode
 
 **Filter Bar**
 - A row of filter buttons for each status, plus an "All" Button

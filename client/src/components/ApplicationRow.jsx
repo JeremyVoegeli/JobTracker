@@ -1,4 +1,4 @@
-function ApplicationRow( {application, onEdit} ){
+function ApplicationRow( {application, onEdit, onDelete} ){
     return(
         <tr>
             <td>{application.jobTitle}</td>

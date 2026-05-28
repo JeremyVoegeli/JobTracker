@@ -1,6 +1,6 @@
 import ApplicationRow from './ApplicationRow';
 
-function ApplicationTable({ applications, onEdit }){
+function ApplicationTable({ applications, onEdit, onDelete }){
     return (
         <table>
             <thead>
@@ -17,7 +17,7 @@ function ApplicationTable({ applications, onEdit }){
             </thead>
             <tbody>
                 {applications.map((application) => (
-                    <ApplicationRow key={application.id} application={application} onEdit={onEdit} />
+                    <ApplicationRow key={application.id} application={application} onEdit={onEdit} onDelete={onDelete} />
                 ))}
             </tbody>
         </table>

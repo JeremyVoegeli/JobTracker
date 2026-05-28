@@ -70,14 +70,15 @@ function App() {
 	}
 
 	return (
-        <div className="max-w-6x1 mx-auto p-6">
-            <Header />
-			<button className="" onClick={() => handleOpenModal()}>Add Application</button>
-			<ApplicationTable applications={filteredApplications} onEdit={handleOpenModal} onDelete={handleOpenDelete} />
-			<ApplicationModal isModalOpen={isModalOpen} selectedApplication={selectedApplication} onClose={handleCloseModal} onSave={loadApplications} />
-			<FilterBar activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
-			<DeleteConfirmDialogue isDeleteOpen={isDeleteOpen} applicationToDelete={applicationToDelete} onClose={handleCloseDelete} onConfirm={handleConfirmDelete} />
-        </div>
+		<html className="bg-zinc-800">
+			<div className="max-w-6x1 mx-auto p-6">
+				<Header onAdd={handleOpenModal}/>
+				<ApplicationTable applications={filteredApplications} onEdit={handleOpenModal} onDelete={handleOpenDelete} />
+				<ApplicationModal isModalOpen={isModalOpen} selectedApplication={selectedApplication} onClose={handleCloseModal} onSave={loadApplications} />
+				<FilterBar activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
+				<DeleteConfirmDialogue isDeleteOpen={isDeleteOpen} applicationToDelete={applicationToDelete} onClose={handleCloseDelete} onConfirm={handleConfirmDelete} />
+			</div>
+		</html>
 	);
 }
 

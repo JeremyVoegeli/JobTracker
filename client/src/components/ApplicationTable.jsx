@@ -2,17 +2,17 @@ import ApplicationRow from './ApplicationRow';
 
 function ApplicationTable({ applications, onEdit, onDelete }){
     return (
-        <table>
+        <table className="w-full border-separate border-spacing-y-1">
             <thead>
                 <tr>
-                    <th>Job Title</th>
-                    <th>Company</th>
-                    <th>Location</th>
-                    <th>Status</th>
-                    <th>Link</th>
-                    <th>Site</th>
-                    <th>Application Date</th>
-                    <th>Last Updated</th>
+                    <th className="text-left p-3 text-sm font-semibold text-gray-600">Job Title</th>
+                    <th className="text-left p-3 text-sm font-semibold text-gray-600">Company</th>
+                    <th className="text-left p-3 text-sm font-semibold text-gray-600">Location</th>
+                    <th className="text-left p-3 text-sm font-semibold text-gray-600">Status</th>
+                    <th className="text-left p-3 text-sm font-semibold text-gray-600">Link</th>
+                    <th className="text-left p-3 text-sm font-semibold text-gray-600">Site</th>
+                    <th className="text-left p-3 text-sm font-semibold text-gray-600">Application Date</th>
+                    <th className="text-left p-3 text-sm font-semibold text-gray-600">Last Updated</th>
                 </tr>
             </thead>
             <tbody>

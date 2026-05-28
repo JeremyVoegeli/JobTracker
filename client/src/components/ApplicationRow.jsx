@@ -14,6 +14,9 @@ function ApplicationRow( {application, onEdit, onDelete} ){
             <td>
                 <button onClick={() => onEdit(application)}>Edit</button>
             </td>
+            <td>
+                <button onClick={() => onDelete(application)}>Delete</button>
+            </td>
         </tr>
     );
 }

@@ -7,11 +7,15 @@ function ApplicationRow( {application, onEdit, onDelete} ){
             <td className={tdClass}>{application.location}</td>
             <td className={tdClass}>{application.status}</td>
             <td className={tdClass}>
-                <a href={application.link} target="_blank" rel="noreferrer" 
-                onClick={(e) => {e.stopPropagation();
-                    if(!application.link||!application.link.startsWith('http')){
-                        e.preventDefault();
-                    }
+                <a 
+                    className="bg-gradient-to-br from-blue-300 to-indigo-800 text-white text-sm font-semibold px-3 py-1 rounded-lg hover:opacity-90"
+                    href={application.link}
+                    target="_blank"
+                    rel="noreferrer" 
+                    onClick={(e) => {e.stopPropagation();
+                        if(!application.link||!application.link.startsWith('http')){
+                            e.preventDefault();
+                        }
                 }}>View Posting</a>
             </td>
             <td className={tdClass}>{application.site}</td>

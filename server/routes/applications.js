@@ -97,7 +97,7 @@ router.put('/:id', (req, res) => {
         //create and add updated application
         const oldApplication = data[index];
         const updatedApplication = {...oldApplication, ...req.body};
-        updatedApplication.lastUpdated = new Date().toISOString();
+        updatedApplication.lastUpdated = new Date().toISOString().split('T')[0];
 
         data[index] = updatedApplication;
         writeData(data);

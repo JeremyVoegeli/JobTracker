@@ -7,7 +7,7 @@ function ApplicationRow( {application, onEdit, onDelete} ){
             <td className={tdClass}>{application.location}</td>
             <td className={tdClass}>{application.status}</td>
             <td className={tdClass}>
-                <a href={application.link} target="_blank" rel="noreferrer">View Posting</a>
+                <a href={application.link} target="_blank" rel="noreferrer" onClick={(e) => e.stopPropagation()}>View Posting</a>
             </td>
             <td className={tdClass}>{application.site}</td>
             <td className={tdClass}>{application.applicationDate}</td>

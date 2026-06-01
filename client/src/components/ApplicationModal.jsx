@@ -47,60 +47,64 @@ function ApplicationModal({ isModalOpen, selectedApplication, onClose, onSave })
     const submitLabel = selectedApplication ? "Save Changes" : "Add Application";
 
     return (
-        <form>
-            <input 
-                type="text" 
-                name="jobTitle"
-                value={formData.jobTitle || ''}
-                onChange={handleChange}
-            />
-            <input 
-                type="text" 
-                name="company"
-                value={formData.company || ''}
-                onChange={handleChange}
-            />
-            <input 
-                type="text" 
-                name="location"
-                value={formData.location || ''}
-                onChange={handleChange}
-            />
-            <select name="status" value={formData.status} onChange={handleChange}>
-                <option value="Applied">Applied</option>
-                <option value="Assessment">Assessment</option>
-                <option value="Phone Screen">Phone Screen</option>
-                <option value="Interview">Interview</option>
-                <option value="Offer">Offer</option>
-                <option value="Rejected">Rejected</option>
-                <option value="Withdrawn">Withdrawn</option>
-            </select>
-            <input 
-                type="text" 
-                name="link"
-                value={formData.link || ''}
-                onChange={handleChange}
-            />
-            <input 
-                type="text" 
-                name="site"
-                value={formData.site || ''}
-                onChange={handleChange}
-            />
-            <input 
-                type="date" 
-                name="applicationDate"
-                value={formData.applicationDate || ''}
-                onChange={handleChange}
-            />
-            <textarea  
-                name="notes"
-                value={formData.notes || ''}
-                onChange={handleChange}
-            />
-            <button onClick={() => onClose()} type="button">Cancel</button>
-            <button onClick={() => handleSubmit()} type="button">{submitLabel}</button>
-        </form>
+        <div className="fixed inset-0 bg-black/30 flex items-center justify-center z-50">
+            <div className="bg-zinc-600 rounded-lg p-6 w-full max-w-md border-zinc-500 border-2">
+                <form className="text-slate-100">
+                    <input 
+                        type="text" 
+                        name="jobTitle"
+                        value={formData.jobTitle || ''}
+                        onChange={handleChange}
+                    />
+                    <input 
+                        type="text" 
+                        name="company"
+                        value={formData.company || ''}
+                        onChange={handleChange}
+                    />
+                    <input 
+                        type="text" 
+                        name="location"
+                        value={formData.location || ''}
+                        onChange={handleChange}
+                    />
+                    <select name="status" value={formData.status} onChange={handleChange}>
+                        <option value="Applied">Applied</option>
+                        <option value="Assessment">Assessment</option>
+                        <option value="Phone Screen">Phone Screen</option>
+                        <option value="Interview">Interview</option>
+                        <option value="Offer">Offer</option>
+                        <option value="Rejected">Rejected</option>
+                        <option value="Withdrawn">Withdrawn</option>
+                    </select>
+                    <input 
+                        type="text" 
+                        name="link"
+                        value={formData.link || ''}
+                        onChange={handleChange}
+                    />
+                    <input 
+                        type="text" 
+                        name="site"
+                        value={formData.site || ''}
+                        onChange={handleChange}
+                    />
+                    <input 
+                        type="date" 
+                        name="applicationDate"
+                        value={formData.applicationDate || ''}
+                        onChange={handleChange}
+                    />
+                    <textarea  
+                        name="notes"
+                        value={formData.notes || ''}
+                        onChange={handleChange}
+                    />
+                    <button onClick={() => onClose()} type="button">Cancel</button>
+                    <button onClick={() => handleSubmit()} type="button">{submitLabel}</button>
+                </form>
+            </div>
+        </div>
     );
 }
 

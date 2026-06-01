@@ -69,8 +69,7 @@ router.post('/', (req, res) => {
 
     //create new fields
     newApplication.id = uuidv4();
-    const currentDate = new Date()
-    newApplication.lastUpdated = currentDate.toISOString();
+    newApplication.lastUpdated = new Date().toISOString().split('T')[0]
 
     try{
         //reads old array and writes new array with new application

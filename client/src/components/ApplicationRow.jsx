@@ -7,7 +7,12 @@ function ApplicationRow( {application, onEdit, onDelete} ){
             <td className={tdClass}>{application.location}</td>
             <td className={tdClass}>{application.status}</td>
             <td className={tdClass}>
-                <a href={application.link} target="_blank" rel="noreferrer" onClick={(e) => e.stopPropagation()}>View Posting</a>
+                <a href={application.link} target="_blank" rel="noreferrer" 
+                onClick={(e) => {e.stopPropagation();
+                    if(!application.link||!application.link.startsWith('http')){
+                        e.preventDefault();
+                    }
+                }}>View Posting</a>
             </td>
             <td className={tdClass}>{application.site}</td>
             <td className={tdClass}>{application.applicationDate}</td>

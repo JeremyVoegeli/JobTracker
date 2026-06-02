@@ -1,3 +1,5 @@
+import { statusColors } from '../constants';
+
 function ApplicationRow( {application, onEdit, onDelete} ){
     const tdClass = "text-slate-100 p-3 border-y border-gray-950 first:border-l first:rounded-l-lg last:border-r last:rounded-r-lg";
     return(
@@ -5,7 +7,10 @@ function ApplicationRow( {application, onEdit, onDelete} ){
             <td className={tdClass}>{application.jobTitle}</td>
             <td className={tdClass}>{application.company}</td>
             <td className={tdClass}>{application.location}</td>
-            <td className={tdClass}>{application.status}</td>
+            <td className={tdClass}>
+                <span className={`border-2 ${statusColors[application.status]} px-2 py-1 rounded-full text-xs font-semibold text-white`}>
+                    {application.status}
+                </span></td>
             <td className={tdClass}>
                 <a 
                     className="bg-gradient-to-br from-blue-300 to-indigo-800 text-white text-sm font-semibold px-3 py-1 rounded-lg hover:opacity-75"

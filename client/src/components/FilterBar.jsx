@@ -1,15 +1,7 @@
+import { statusColors } from '../constants';
+
 function FilterBar( {activeFilter, setActiveFilter} ){
     const statuses = ["Applied", "Assessment", "Phone Screen", "Interview", "Offer", "Rejected", "Withdrawn", "All"];
-    const statusColors = {
-    'Applied': 'border-sky-300',
-    'Assessment': 'border-violet-300',
-    'Phone Screen': 'border-amber-300',
-    'Interview': 'border-orange-500',
-    'Offer': 'border-green-500',
-    'Rejected': 'border-red-500',
-    'Withdrawn': 'border-gray-500',
-    'All': 'border-zinc-500'
-};
     return (
         <div className="flex flex-col gap-2 bg-zinc-700 border-2 border-zinc-500 rounded-lg h-fit">
             <h3 className="text-white font-semibold text-center text-lg">Filter</h3>

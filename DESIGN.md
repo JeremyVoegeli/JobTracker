@@ -5,9 +5,9 @@
 A full-stack web application for tracking job application throughout the job search process. Built as a personal project to replace keeping a manual spreadsheet, and to get experience with react and Node.js.
 
 **Tech Stack:**
-- **Frontend:** React
+- **Frontend:** React + Vite + Tailwind CSS
 - **Backend:** Node.js + Express
-- **Data Storage:** JSON file
+- **Data Storage:** PostgreSQL (via Supabase)
 - **Hosting:** Vercel (frontend), Render (backend)
 
 **Goals:**
@@ -233,75 +233,78 @@ DELETE /api/applications/:id
 
 ## 4. Frontend Design
 
-### Pages & Components
+### 4.1 Pages & Components
 
 The app is a single-pahe application with no routing
 
 **Component Tree**
-
 ```
 App
 ├── Header
-├── FilterBar
-├── ApplicationTable
-│   └── ApplicationRow (× n)
-│       └── StatusBadge
+├── div (flex row)
+│   ├── FilterBar
+│   └── ApplicationTable
+│       └── ApplicationRow (× n)
 ├── ApplicationModal (Add / Edit)
-│   └── ApplicationForm
 └── DeleteConfirmDialog
 ```
 
 ---
 
-### Views & Interactions
+### 4.2 Views & Interactions
 
 **Main View**
-- Displays all applications in a table
-- Columns: Job Title, Company, Location, Status, Site, Application Date, Link, Actions
-- Link is displayed as a "view posting" button rather than a raw URL
-- Notes are hidden from the table, they are only visible through the edit modal
-- Each row has a **Delete** action button
-- A **+ add application** button opens the modal form
-- Clicking the row opens the modal in edit mode
+- Header with app title and Add Application button
+- Filter bar displayed to the left of the application table
+- Application table with columns: Job Title, Company, Location, Status, Site, Application Date, Link, Actions
+- Link is displayed as a styled "View Posting" button; invalid/missing links do not open a new tab
+- Notes are hidden from the table and only visible/editable through the edit modal
+- Clicking a row opens the edit modal for that application
+- Each row has a Delete action button; clicking it opens the delete confirmation dialog
 
 **Filter Bar**
-- A row of filter buttons for each status, plus an "All" Button
+- A vertical column of filter buttons for each status value plus an "All" option
+- Each button has a colored underline border corresponding to its status color
 - Selecting a status filters the table to matching rows only
+- Active filter is indicated by full opacity; inactive filters are dimmed
 
 **Add / Edit Modal**
+- Opens as an overlay above the page with a semi-transparent backdrop
 - A form with fields for all application properties except `id` and `lastUpdated`
+- Fields are arranged in a two-column grid layout; notes spans full width at the bottom
 - Notes field is a multi-line text area
-- Status is a drop down menu only with the options in the Enum
-- Application date defaults to today's date
-- Submit button labeled **Add Application** (Add mode) or **Save Changes** (Edit mode)
+- Status is a dropdown restricted to the defined enum values
+- Application Date defaults to today's date on the Add form
+- Submit button labeled **Add Application** (add mode) or **Save Changes** (edit mode)
 
-**Delete Confirmation Dialogue**
-- A confirmation prompt appears before deleting an entry
-- Displays the job title and company to ensure the correct application is being deleted
+**Delete Confirmation Dialog**
+- Opens as an overlay above the page with a semi-transparent backdrop
+- Displays the job title and company so the user can confirm they have the right record
+- Cancel button and a red Delete button
 
 ---
 
 ### Status Badge Colors
 
-Status badges in the table are color coordinated for quick visual scanning.
-
-| Status | Color |
-| --- | --- |
-| Applied | Blue |
-| Assessment | Purple |
-| Phone Screen | Yellow |
-| Interview | Orange |
-| Offer | Green |
-| Rejected | Red |
-| Withdrawn | Gray |
-
+Status colors are defined in `src/constants.js` and used consistently across filter buttons and status badges:
+ 
+| Status | Tailwind Border Color |
+|---|---|
+| Applied | `border-sky-300` |
+| Assessment | `border-violet-300` |
+| Phone Screen | `border-amber-300` |
+| Interview | `border-orange-500` |
+| Offer | `border-green-500` |
+| Rejected | `border-red-500` |
+| Withdrawn | `border-gray-500` |
+ 
 ---
 
 ## 5. Project Structure
-
+ 
 ```
 job-tracker/
-├── client/    ----- React frontend -----
+├── client/                          # React frontend (Vite + Tailwind)
 │   ├── public/
 │   └── src/
 │       ├── components/
@@ -309,20 +312,20 @@ job-tracker/
 │       │   ├── FilterBar.jsx
 │       │   ├── ApplicationTable.jsx
 │       │   ├── ApplicationRow.jsx
-│       │   ├── StatusBadge.jsx
 │       │   ├── ApplicationModal.jsx
-│       │   ├── ApplicationForm.jsx
 │       │   └── DeleteConfirmDialog.jsx
+│       ├── constants.js             # Shared status color map
 │       ├── App.jsx
 │       └── main.jsx
-├── server/    ----- Node/Express backend -----
-│   ├── data/
-│   │   └── applications.json
+├── server/                          # Node/Express backend
 │   ├── routes/
 │   │   └── applications.js
-│   ├── middleware/
-│   │   └── errorHandler.js
+│   ├── tests/
+│   │   └── applications.test.js
 │   └── server.js
+├── .github/
+│   └── workflows/
+│       └── ci.yml                   # GitHub Actions CI pipeline
 ├── DESIGN.md
 └── README.md
 ```

@@ -8,7 +8,7 @@ function ApplicationRow( {application, onEdit, onDelete} ){
             <td className={tdClass}>{application.status}</td>
             <td className={tdClass}>
                 <a 
-                    className="bg-gradient-to-br from-blue-300 to-indigo-800 text-white text-sm font-semibold px-3 py-1 rounded-lg hover:opacity-90"
+                    className="bg-gradient-to-br from-blue-300 to-indigo-800 text-white text-sm font-semibold px-3 py-1 rounded-lg hover:opacity-75"
                     href={application.link}
                     target="_blank"
                     rel="noreferrer" 
@@ -22,7 +22,11 @@ function ApplicationRow( {application, onEdit, onDelete} ){
             <td className={tdClass}>{application.applicationDate}</td>
             <td className={tdClass}>{application.lastUpdated}</td>
             <td className={tdClass}>
-                <button onClick={(e) => {e.stopPropagation(); onDelete(application)}}>Delete</button>
+                <button 
+                    onClick={(e) => {e.stopPropagation(); onDelete(application)}}
+                    className="bg-zinc-500 border-1 border-red-500 hover:bg-zinc-400 text-sm font-semibold px-3 py-1 rounded-lg hover:opacity-90"
+                    >Delete
+                </button>
             </td>
         </tr>
     );

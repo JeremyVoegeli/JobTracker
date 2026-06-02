@@ -70,7 +70,7 @@ function App() {
 	}
 
 	return (
-		<div className="max-w-6xl mx-auto p-6">
+		<div className="max-w-screen mx-auto p-6">
 			<Header onAdd={handleOpenModal}/>
 			<ApplicationModal isModalOpen={isModalOpen} selectedApplication={selectedApplication} onClose={handleCloseModal} onSave={loadApplications} />
 			<div className="flex gap-4 max-height-min">

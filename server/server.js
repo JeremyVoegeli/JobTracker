@@ -1,4 +1,5 @@
 //Imports, packages that will be used
+require('dotenv').config()
 const express = require('express');
 const cors = require('cors');
 const applicationRoutes = require('./routes/applications');

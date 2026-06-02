@@ -72,9 +72,11 @@ function App() {
 	return (
 		<div className="max-w-6xl mx-auto p-6">
 			<Header onAdd={handleOpenModal}/>
-			<ApplicationTable applications={filteredApplications} onEdit={handleOpenModal} onDelete={handleOpenDelete} />
 			<ApplicationModal isModalOpen={isModalOpen} selectedApplication={selectedApplication} onClose={handleCloseModal} onSave={loadApplications} />
-			<FilterBar activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
+			<div className="flex gap-4 max-height-min">
+				<ApplicationTable applications={filteredApplications} onEdit={handleOpenModal} onDelete={handleOpenDelete} />
+				<FilterBar activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
+			</div>
 			<DeleteConfirmDialogue isDeleteOpen={isDeleteOpen} applicationToDelete={applicationToDelete} onClose={handleCloseDelete} onConfirm={handleConfirmDelete} />
 		</div>
 	);

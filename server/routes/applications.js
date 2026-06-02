@@ -5,6 +5,20 @@ const fs = require('fs');
 const path = require('path');
 const {v4: uuidv4} = require('uuid');
 
+//SELECT fields for SQL queries, repeatedly used
+const SELECT_FIELDS = `
+    id,
+    job_title AS "jobTitle",
+    company,
+    location,
+    status,
+    link,
+    site,
+    application_date AS "applicationDate",
+    notes,
+    last_updated AS "lastUpdated"
+`;
+
 //Constant for path to json "database"
 const jsonPath = process.env.DATA_FILE || path.join(__dirname, '..', 'data', 'applications.json');
 

@@ -62,7 +62,7 @@ router.get('/:id', async (req, res) => {
 });
 
 //POST method - creates a new application
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
     //check for any missing fields
     let missingFields = [];
     if (!req.body.jobTitle){missingFields.push('jobTitle');}
@@ -76,22 +76,23 @@ router.post('/', (req, res) => {
         return res.status(400).json({error: errorMsg});
     }
 
-    let newApplication = req.body;
+    const {jobTitle, company, location, status, link, site, applicationDate, notes} = req.body;
 
     //create new fields
-    newApplication.id = uuidv4();
-    newApplication.lastUpdated = new Date().toISOString().split('T')[0]
+    const id = uuidv4();
+    const lastUpdated = new Date().toISOString();
 
     try{
-        //reads old array and writes new array with new application
-        let newArray = readData();
-        newArray.push(newApplication);
-        writeData(newArray);
+        //SQL query
+        const result = await pool.query(`INSERT INTO applications
+            (id, job_title, company, location, status, link, site, application_date, notes, last_updated)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)   
+            RETURNING id, job_title AS "jobTitle", company, location, status, link, site, application_date AS "applicationDate", notes, last_updated AS "lastUpdated"
+        `, [id, jobTitle, company, location || null, status, link || null, site || null, applicationDate, notes || null, lastUpdated])
+        res.status(201).json(result.rows[0]);
     } catch (err) {
-        return res.status(500).json({error: "Failed to read applications.json"});
+        res.status(500).json({error: "Error writing to database"})
     }
-    
-    return res.status(201).json(newApplication);
 });
 
 //PUT method - updates an application with the given ID with the parameters in the body

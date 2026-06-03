@@ -25,7 +25,6 @@ describe("GET /api/applications", () => {
     test("Should initially return empty array", async () => {
         const response = await request.get("/api/applications");
 
-        console.log(response.body);
         expect(response.status).toBe(200);
         expect(response.body).toEqual([]);
     });

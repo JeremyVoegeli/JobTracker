@@ -14,7 +14,16 @@ jobs:
       - name: Install Dependencies
         run: npm install
         working-directory: server
-      
+      - name: Debug ENV
+        run: |
+          if [ -z "$DATABASE_URL" ]; then
+            echo "DATABASE_URL is NOT set"
+          else
+            echo "DATABASE_URL is set"
+          fi
+        working-directory: server
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
       - name: Run Tests
         run: npm test
         working-directory: server

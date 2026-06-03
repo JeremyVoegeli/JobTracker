@@ -110,7 +110,7 @@ describe("GET /api/applications/:id", () => {
 
     test("application object not found", async () => {
         //create request
-        const response = await request.get(`/api/applications/invalid-id`);
+        const response = await request.get(`/api/applications/00000000-0000-0000-0000-000000000000`);
 
         const expectedResponseBody = {"error": "Application not found"};
 
@@ -155,7 +155,7 @@ describe("DELETE /api/applications/:id", () => {
     });
 
     test("Attempt to delete non-existant application", async () => {
-        const response = await request.delete("/api/applications/invalid-id");
+        const response = await request.delete("/api/applications/00000000-0000-0000-0000-000000000000");
         
         const expectedResponseBody = {"error": "Application not found"}
         

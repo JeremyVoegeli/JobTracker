@@ -42,7 +42,7 @@ describe("POST /api/applications", () => {
                 "status": "Applied",
                 "link": "https://example.com/job",
                 "site": "LinkedIn",
-                "applicationDate": "2026-05-21",
+                "applicationDate": "2026-05-21T00:00:00.000Z",
                 "notes": ""
             });
         
@@ -57,7 +57,7 @@ describe("POST /api/applications", () => {
             "status": "Applied",
             "link": "https://example.com/job",
             "site": "LinkedIn",
-            "applicationDate": "2026-05-21",
+            "applicationDate": "2026-05-21T00:00:00.000Z",
             "notes": ""
         }
 

@@ -19,22 +19,6 @@ const SELECT_FIELDS = `
     last_updated AS "lastUpdated"
 `;
 
-//Constant for path to json "database"
-const jsonPath = process.env.DATA_FILE || path.join(__dirname, '..', 'data', 'applications.json');
-
-//reads the data from the applications.json file, returns the JSON array
-function readData(){
-    const rawData = fs.readFileSync(jsonPath, 'utf8');
-    const jsonData = JSON.parse(rawData);
-    return(jsonData);
-};
-
-//takes in a JSON array, writes it to applications.json
-function writeData(data){
-    const jsonString = JSON.stringify(data, null, 2);
-    fs.writeFileSync(jsonPath, jsonString);
-};
-
 //GET method - return all applications
 router.get('/', async (req, res) => {
     try{

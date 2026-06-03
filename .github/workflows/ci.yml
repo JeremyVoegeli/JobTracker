@@ -18,3 +18,5 @@ jobs:
       - name: Run Tests
         run: npm test
         working-directory: server
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}

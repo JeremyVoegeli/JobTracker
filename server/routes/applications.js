@@ -96,27 +96,34 @@ router.post('/', async (req, res) => {
 });
 
 //PUT method - updates an application with the given ID with the parameters in the body
-router.put('/:id', (req, res) => {
+router.put('/:id', async (req, res) => {
+    //get application fields
+    const {id, jobTitle, company, location, status, link, site, applicationDate, notes} = req.body;
+    const lastUpdated = new Date().toISOString();
     try {
-        const data = readData();
-
-        //find the index of the desired application
-        const index = data.findIndex(app => app.id === req.params.id);
-        if (index === -1){
-            return res.status(404).json({error: "Application not found"});
+        const result = await pool.query(`
+            UPDATE applications
+            SET 
+                job_title = COALESCE($1, job_title),
+                company = COALESCE($2, company),
+                location = COALESCE($3, location),
+                status = COALESCE($4, status),
+                link = COALESCE($5, link),
+                site = COALESCE($6, site),
+                application_date = COALESCE($7, application_date),
+                notes = COALESCE($8, notes),
+                last_updated = $9
+            WHERE id = $10
+            RETURNING id, job_title AS "jobTitle", company, location, status, link, site, application_date AS "applicationDate", notes, last_updated AS "lastUpdated"
+        `, [jobTitle || null, company || null, location || null, status || null, link || null, site || null, applicationDate || null, notes || null, lastUpdated, req.params.id]);
+        
+        if (result.rows[0]){
+            res.status(200).json(result.rows[0]);
+        } else {
+            res.status(404).json({error: "Application not found"})
         }
-
-        //create and add updated application
-        const oldApplication = data[index];
-        const updatedApplication = {...oldApplication, ...req.body};
-        updatedApplication.lastUpdated = new Date().toISOString().split('T')[0];
-
-        data[index] = updatedApplication;
-        writeData(data);
-
-        return res.status(200).json(updatedApplication);
     } catch (err){
-        return res.status(500).json({error: "Failed to read applications.json"});
+        return res.status(500).json({error: "Failed to read from database"});
     }
 });
 

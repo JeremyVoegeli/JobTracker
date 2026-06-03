@@ -4,6 +4,7 @@ const router = express.Router();
 const fs = require('fs');
 const path = require('path');
 const {v4: uuidv4} = require('uuid');
+const pool = require('../db');
 
 //SELECT fields for SQL queries, repeatedly used
 const SELECT_FIELDS = `
@@ -25,7 +26,6 @@ router.get('/', async (req, res) => {
         const result = await pool.query(`SELECT ${SELECT_FIELDS} FROM applications;`);
         return res.status(200).json(result.rows);
     } catch (err){
-        console.error(err.message);
         return res.status(500).json({error: "Failed to read database"})
     }
 });

@@ -43,6 +43,7 @@ router.get('/:id', async (req, res) => {
             return res.status(404).json({error: "Application not found"})
         }
     } catch (err){
+        console.log(err);
         return res.status(500).json({error: "Failed to read database"})
     }
 });

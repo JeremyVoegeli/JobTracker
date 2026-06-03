@@ -100,8 +100,8 @@ describe("GET /api/applications/:id", () => {
             "status": "Applied",
             "link": "https://example.com/job",
             "site": "LinkedIn",
-            "applicationDate": "2026-05-21",
-            "notes": ""
+            "applicationDate": "2026-05-21T00:00:00.000Z",
+            "notes": null
         }
 
         expect(response.status).toBe(200);

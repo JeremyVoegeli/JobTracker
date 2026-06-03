@@ -8,7 +8,7 @@ import DeleteConfirmDialogue from './components/DeleteConfirmDialogue';
 function App() {
 	//async function to get applications from API
 	async function fetchApplications(){
-		const response = await fetch("http://localhost:5000/api/applications");
+		const response = await fetch(`${import.meta.env.VITE_API_URL}/api/applications`);
 		const data = await response.json();
 		return data;
 	}
@@ -61,7 +61,7 @@ function App() {
 	}
 
 	async function handleConfirmDelete(){
-		const response = await fetch(`http://localhost:5000/api/applications/${applicationToDelete.id}`, {method:"DELETE"});
+		const response = await fetch(`${import.meta.env.VITE_API_URL}/api/applications/${applicationToDelete.id}`, {method:"DELETE"});
 		
 		if(response.ok){
 			loadApplications();

@@ -25,7 +25,7 @@ function ApplicationModal({ isModalOpen, selectedApplication, onClose, onSave })
     }
 
     async function handleSubmit(){
-        const url = selectedApplication ? `http://localhost:5000/api/applications/${selectedApplication.id}` : "http://localhost:5000/api/applications";
+        const url = selectedApplication ? `${import.meta.env.VITE_API_URL}/api/applications/${selectedApplication.id}` : `${import.meta.env.VITE_API_URL}/api/applications`;
         const method = selectedApplication ? "PUT" : "POST";
 
         const response = await fetch(url, {

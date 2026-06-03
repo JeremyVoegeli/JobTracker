@@ -78,7 +78,7 @@ router.post('/', async (req, res) => {
         `, [id, jobTitle, company, location || null, status, link || null, site || null, applicationDate, notes || null, lastUpdated])
         return res.status(201).json(result.rows[0]);
     } catch (err) {
-        return res.status(500).json({error: "Error writing to database"})
+        return res.status(500).json({error: err.message})
     }
 });
 

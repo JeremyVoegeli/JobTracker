@@ -24,8 +24,8 @@ function ApplicationRow( {application, onEdit, onDelete} ){
                 }}>View Posting</a>
             </td>
             <td className={tdClass}>{application.site}</td>
-            <td className={tdClass}>{application.applicationDate}</td>
-            <td className={tdClass}>{application.lastUpdated}</td>
+            <td className={tdClass}>{application.applicationDate.split('T')[0]}</td>
+            <td className={tdClass}>{application.lastUpdated.split('T')[0]}</td>
             <td className={tdClass}>
                 <button 
                     onClick={(e) => {e.stopPropagation(); onDelete(application)}}

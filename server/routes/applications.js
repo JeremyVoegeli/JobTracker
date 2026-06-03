@@ -36,31 +36,28 @@ function writeData(data){
 };
 
 //GET method - return all applications
-router.get('/', (req, res) => {
-    try {
-        const data = readData();
-        res.json(data);
-    } catch (err) {
-        res.status(500).json({error: "Failed to read applications"});
+router.get('/', async (req, res) => {
+    try{
+        const result = await pool.query(`SELECT ${SELECT_FIELDS} FROM applications;`);
+        res.status(200).json(result.rows);
+    } catch (err){
+        res.status(500).json({error: "Failed to read database"})
     }
 });
 
 //GET method - returns the application object with the specified ID
-router.get('/:id', (req, res) => {
-    //reads data, looks for id in applications.json
+router.get('/:id', async (req, res) => {
     try{
-        const data = readData();
-        const application = data.find(app => app.id === req.params.id);
+        const result = await pool.query(`SELECT ${SELECT_FIELDS} FROM applications WHERE id = $1`, [req.params.id]);
+        const application = result.rows[0];
 
-        //return error if no application
-        if (!application){
-            return res.status(404).json({error: "Application not found"});
+        if (application){
+            res.status(200).json(application);
+        } else {
+            res.status(404).json({error: "Application not found"})
         }
-
-        return res.status(200).json(application);
-
-    } catch (err) {
-        res.status(500).json({error: "Failed to read applications"});
+    } catch (err){
+        res.status(500).json({error: "Failed to read database"})
     }
 });
 

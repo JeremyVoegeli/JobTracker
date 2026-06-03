@@ -39,9 +39,9 @@ function writeData(data){
 router.get('/', async (req, res) => {
     try{
         const result = await pool.query(`SELECT ${SELECT_FIELDS} FROM applications;`);
-        res.status(200).json(result.rows);
+        return res.status(200).json(result.rows);
     } catch (err){
-        res.status(500).json({error: "Failed to read database"})
+        return res.status(500).json({error: "Failed to read database"})
     }
 });
 
@@ -52,12 +52,12 @@ router.get('/:id', async (req, res) => {
         const application = result.rows[0];
 
         if (application){
-            res.status(200).json(application);
+            return res.status(200).json(application);
         } else {
-            res.status(404).json({error: "Application not found"})
+            return res.status(404).json({error: "Application not found"})
         }
     } catch (err){
-        res.status(500).json({error: "Failed to read database"})
+        return res.status(500).json({error: "Failed to read database"})
     }
 });
 
@@ -89,9 +89,9 @@ router.post('/', async (req, res) => {
             VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)   
             RETURNING id, job_title AS "jobTitle", company, location, status, link, site, application_date AS "applicationDate", notes, last_updated AS "lastUpdated"
         `, [id, jobTitle, company, location || null, status, link || null, site || null, applicationDate, notes || null, lastUpdated])
-        res.status(201).json(result.rows[0]);
+        return res.status(201).json(result.rows[0]);
     } catch (err) {
-        res.status(500).json({error: "Error writing to database"})
+        return res.status(500).json({error: "Error writing to database"})
     }
 });
 
@@ -118,33 +118,26 @@ router.put('/:id', async (req, res) => {
         `, [jobTitle || null, company || null, location || null, status || null, link || null, site || null, applicationDate || null, notes || null, lastUpdated, req.params.id]);
         
         if (result.rows[0]){
-            res.status(200).json(result.rows[0]);
+            return res.status(200).json(result.rows[0]);
         } else {
-            res.status(404).json({error: "Application not found"})
+            return res.status(404).json({error: "Application not found"})
         }
     } catch (err){
-        return res.status(500).json({error: "Failed to read from database"});
+        return res.status(500).json({error: "Failed to update application"});
     }
 });
 
-//DELETE method - removes an application from the file with the given id
-router.delete('/:id', (req, res) => {
+//DELETE method - removes an application from the db with the given id
+router.delete('/:id', async (req, res) => {
     try{
-        const data = readData();
-
-        //Check that application exists
-        const index = data.findIndex(app => app.id === req.params.id);
-        if (index === -1){
-            return res.status(404).json({error: "Application not found"});
+        const result = await pool.query('DELETE FROM applications WHERE id = $1 RETURNING job_title as jobTitle', [req.params.id]);
+        if(result.rows[0]){
+            return res.status(200).json({"message": "Application deleted successfully"});
+        } else {
+            return res.status(404).json({error: "Application not found"})
         }
-
-        //creates new array and writes to file
-        const newArray = data.filter(app => app.id !== req.params.id);
-        writeData(newArray);
-
-        return res.status(200).json({"message": "Application deleted successfully"});
     } catch (err) {
-        return res.status(500).json({error: "Failed to read applications.json"});
+        return res.status(500).json({error: "Failed to delete application from database"});
     }
 });
 

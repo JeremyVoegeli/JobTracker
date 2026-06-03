@@ -26,6 +26,7 @@ router.get('/', async (req, res) => {
         const result = await pool.query(`SELECT ${SELECT_FIELDS} FROM applications;`);
         return res.status(200).json(result.rows);
     } catch (err){
+        console.error(err.message);
         return res.status(500).json({error: "Failed to read database"})
     }
 });

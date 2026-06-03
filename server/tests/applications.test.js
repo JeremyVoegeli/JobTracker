@@ -42,7 +42,7 @@ describe("POST /api/applications", () => {
                 "status": "Applied",
                 "link": "https://example.com/job",
                 "site": "LinkedIn",
-                "applicationDate": "2026-05-21T00:00:00.000Z",
+                "applicationDate": "2026-05-21",
                 "notes": null
             });
         
@@ -57,8 +57,8 @@ describe("POST /api/applications", () => {
             "status": "Applied",
             "link": "https://example.com/job",
             "site": "LinkedIn",
-            "applicationDate": "2026-05-21",
-            "notes": ""
+            "applicationDate": "2026-05-21T00:00:00.000Z",
+            "notes": null
         }
 
         //check for response status and body

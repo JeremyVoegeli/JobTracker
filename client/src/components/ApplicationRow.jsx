@@ -11,7 +11,7 @@ function ApplicationRow( {application, onEdit, onDelete} ){
                 <span className={`border-2 ${statusColors[application.status]} px-2 py-1 rounded-full text-xs font-semibold text-white`}>
                     {application.status}
                 </span></td>
-            <td className={tdClass}>
+            <td className={`${tdClass} w-34`}>
                 <a 
                     className="bg-gradient-to-br from-blue-300 to-indigo-800 text-white text-sm font-semibold px-3 py-1 rounded-lg hover:opacity-75"
                     href={application.link}

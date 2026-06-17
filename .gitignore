@@ -10,3 +10,5 @@ client/.env
 .DS_Store
 
 server/tests/test_applications.json
+
+TODO

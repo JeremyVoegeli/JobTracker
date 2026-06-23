@@ -148,7 +148,7 @@ describe("PUT /api/applications/:id", () => {
     });
 });
 
-/*
+
 describe("DELETE /api/applications/:id", () => {
     test("Delete test application", async () => {
         const response = await request.delete(`/api/applications/${testId}`);
@@ -168,4 +168,3 @@ describe("DELETE /api/applications/:id", () => {
         expect(response.body).toEqual(expectedResponseBody);
     });
 });
-*/

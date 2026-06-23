@@ -71,7 +71,7 @@ function App() {
 
 	return (
 		<div className="max-w-screen mx-auto p-6">
-			<Header onAdd={handleOpenModal}/>
+			<Header onAdd={handleOpenModal} jobCount={applications.length}/>
 			<ApplicationModal isModalOpen={isModalOpen} selectedApplication={selectedApplication} onClose={handleCloseModal} onSave={loadApplications} />
 			<div className="flex gap-4 max-height-min">
 				<ApplicationTable applications={filteredApplications} onEdit={handleOpenModal} onDelete={handleOpenDelete} />

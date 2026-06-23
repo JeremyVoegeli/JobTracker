@@ -122,25 +122,25 @@ describe("GET /api/applications/:id", () => {
     });
 });
 
-/*
+
 describe("PUT /api/applications/:id", () => {
     test("2 parameters updated from request body", async () => {
         const response = await request.put(`/api/applications/${testId}`)
         .set("Content-Type", "application/json")
         .send({
-            "jobTitle": "otherMyTitle",
-            "site": "Indeed.com"
+            "jobTitle": "otherTestTitle",
+            "site": "otherTestSite"
         });
 
         const expectedResponseBody = {
-            "jobTitle": "otherMyTitle",
-            "company": "myCompany",
-            "location": "Hybrid",
+            "jobTitle": "otherTestTitle",
+            "company": "testCompany",
+            "location": "testLocation",
             "status": "Applied",
             "link": "https://example.com/job",
-            "site": "Indeed.com",
+            "site": "otherTestSite",
             "applicationDate": "2026-05-21T00:00:00.000Z",
-            "notes": null
+            "notes": "testNotes"
         }
 
         expect(response.status).toBe(200);
@@ -148,6 +148,7 @@ describe("PUT /api/applications/:id", () => {
     });
 });
 
+/*
 describe("DELETE /api/applications/:id", () => {
     test("Delete test application", async () => {
         const response = await request.delete(`/api/applications/${testId}`);

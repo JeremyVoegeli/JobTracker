@@ -74,12 +74,23 @@ function App() {
 		}
 	}
 
+	//applies condition to every application being searched for, before the list is passed to ApplicationTable
+	function applicationSearchFilter(app){
+		if (!searchText){
+			return true;
+		} else if (!app[selectedSearchField]){
+			return false;
+		} else {
+			return (app[selectedSearchField]).toLowerCase().includes(searchText.toLowerCase());
+		}
+	};
+
 	return (
 		<div className="max-w-screen mx-auto p-6">
 			<Header onAdd={handleOpenModal} jobCount={applications.length} searchText={searchText} searchField={selectedSearchField} setSearchText={setSearchText} setSearchField={setSelectedSearchField} />
 			<ApplicationModal isModalOpen={isModalOpen} selectedApplication={selectedApplication} onClose={handleCloseModal} onSave={loadApplications} />
 			<div className="flex gap-4 max-height-min">
-				<ApplicationTable applications={filteredApplications.filter(app => (app[selectedSearchField]).toLowerCase().includes(searchText.toLowerCase()))} onEdit={handleOpenModal} onDelete={handleOpenDelete} />
+				<ApplicationTable applications={filteredApplications.filter(app => applicationSearchFilter(app))} onEdit={handleOpenModal} onDelete={handleOpenDelete} />
 				<FilterBar activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
 			</div>
 			<DeleteConfirmDialogue isDeleteOpen={isDeleteOpen} applicationToDelete={applicationToDelete} onClose={handleCloseDelete} onConfirm={handleConfirmDelete} />

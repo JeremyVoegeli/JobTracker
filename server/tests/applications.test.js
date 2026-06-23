@@ -67,18 +67,18 @@ describe("POST /api/applications", () => {
         expect(response.body).toEqual(expect.objectContaining(expectedResponseBody));
 
     });
-});
-/*
+
+
     test("Should fail when not all required fields are included", async () => {
         //create requests (jobTitle field not included)
         const response = await request.post("/api/applications")
             .set('Content-Type', 'application/json')
             .send({
-                "company": "myCompany",
-                "location": "Hybrid",
+                "company": "testCompany",
+                "location": "testLocation",
                 "status": "Applied",
                 "link": "https://example.com/job",
-                "site": "LinkedIn",
+                "site": "testSite",
                 "applicationDate": "2026-05-21",
                 "notes": ""
             });
@@ -90,20 +90,21 @@ describe("POST /api/applications", () => {
     });
 });
 
+
 describe("GET /api/applications/:id", () => {
     test("Application object found", async () => {
         //create request
         const response = await request.get(`/api/applications/${testId}`);
 
         const expectedResponseBody = {
-            "jobTitle": "myTitle",
-            "company": "myCompany",
-            "location": "Hybrid",
+            "jobTitle": "testTitle",
+            "company": "testCompany",
+            "location": "testLocation",
             "status": "Applied",
             "link": "https://example.com/job",
-            "site": "LinkedIn",
+            "site": "testSite",
             "applicationDate": "2026-05-21T00:00:00.000Z",
-            "notes": null
+            "notes": "testNotes"
         }
 
         expect(response.status).toBe(200);
@@ -121,6 +122,7 @@ describe("GET /api/applications/:id", () => {
     });
 });
 
+/*
 describe("PUT /api/applications/:id", () => {
     test("2 parameters updated from request body", async () => {
         const response = await request.put(`/api/applications/${testId}`)

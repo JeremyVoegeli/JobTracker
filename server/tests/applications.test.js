@@ -22,7 +22,7 @@ let testId;
 // ---------------------------------- TESTS ----------------------------------
 
 describe("GET /api/applications", () => {
-    test("Should initially return empty array", async () => {
+    test("Should get all applications with return code of 200", async () => {
         const response = await request.get("/api/applications");
 
         expect(response.status).toBe(200);
@@ -30,21 +30,21 @@ describe("GET /api/applications", () => {
     });
 });
 
-/*
+
 describe("POST /api/applications", () => {
     test("Should successfully add a new application", async () => {
         //create requests
         const response = await request.post("/api/applications")
             .set('Content-Type', 'application/json')
             .send({
-                "jobTitle": "myTitle",
-                "company": "myCompany",
-                "location": "Hybrid",
+                "jobTitle": "testTitle",
+                "company": "testCompany",
+                "location": "testLocation",
                 "status": "Applied",
                 "link": "https://example.com/job",
-                "site": "LinkedIn",
+                "site": "testSite",
                 "applicationDate": "2026-05-21",
-                "notes": null
+                "notes": "testNotes"
             });
         
         //set id for future tests
@@ -52,14 +52,14 @@ describe("POST /api/applications", () => {
         
         //expected json response
         const expectedResponseBody = {
-            "jobTitle": "myTitle",
-            "company": "myCompany",
-            "location": "Hybrid",
+            "jobTitle": "testTitle",
+            "company": "testCompany",
+            "location": "testLocation",
             "status": "Applied",
             "link": "https://example.com/job",
-            "site": "LinkedIn",
+            "site": "testSite",
             "applicationDate": "2026-05-21T00:00:00.000Z",
-            "notes": null
+            "notes": "testNotes"
         }
 
         //check for response status and body
@@ -67,7 +67,8 @@ describe("POST /api/applications", () => {
         expect(response.body).toEqual(expect.objectContaining(expectedResponseBody));
 
     });
-
+});
+/*
     test("Should fail when not all required fields are included", async () => {
         //create requests (jobTitle field not included)
         const response = await request.post("/api/applications")
